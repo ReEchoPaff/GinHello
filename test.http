@@ -1,0 +1,52 @@
+#### 获取通用的配置信息
+#GET {{host}}/v1/noauth/common/info?dict_type=1
+#
+#> {%
+#client.test("Request executed successfully", function() {
+#  client.assert(response.body.code == 200, "Response status is not 200");
+#});
+#%}
+
+### 注册
+POST {{host}}/user/rest_register
+Content-Type: application/json
+
+{
+    "email": "restregister@163.com",
+    "password": "123456"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.body.code === 200, "Response status is not 200");
+});
+%}
+
+
+### 登陆
+POST {{host}}/user/rest_login
+Content-Type: application/json
+
+{
+  "email": "restregister@163.com",
+  "password": "123456"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.body.code  === 200, "Response status is not 200");
+});
+%}
+
+
+### 在通过id返回用户信息
+GET {{host}}/user/rest_profile?id=5
+
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.body.code  === 200, "Response status is not 200");
+});
+%}
+
+###
