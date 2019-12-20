@@ -1,0 +1,25 @@
+#### 获取通用的配置信息
+#GET {{host}}/v1/noauth/common/info?dict_type=1
+#
+#> {%
+#client.test("Request executed successfully", function() {
+#  client.assert(response.body.code == 200, "Response status is not 200");
+#});
+#%}
+
+### 注册
+POST {{host}}/article
+Content-Type: application/json
+
+{
+    "type": "go",
+    "content": "hello GGG"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.body.code === 200, "Response status is not 200");
+});
+%}
+
+###

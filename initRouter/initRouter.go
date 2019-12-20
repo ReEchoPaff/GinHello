@@ -14,7 +14,7 @@ func SetupRouter() *gin.Engine {
 	// 添加自定义的logger中间件， context.Next()之前顺序执行，之后逆序执行，类似于栈。
 	router.Use(gin.Logger(), middleware.Logger(), gin.Recovery())
 
-	if mode := gin.Mode(); mode == gin.TestMode {
+	if mode := gin.Mode(); mode == gin.TestMode || mode == gin.DebugMode {
 		router.LoadHTMLGlob("./../templates/*")
 	} else {
 		router.LoadHTMLGlob("templates/*")
@@ -42,5 +42,13 @@ func SetupRouter() *gin.Engine {
 		// 上传文件
 		userRouter.POST("/update", middleware.Auth(), handler.UpdateUserProfile)
 	}
+
+	// 添加 article
+	articleRouter := router.Group("")
+	{
+		// 添加一篇文章
+		articleRouter.POST("/article", handler.ArticleInsert)
+	}
+
 	return router
 }
