@@ -1,0 +1,80 @@
+definitions:
+  model.Article:
+    properties:
+      content:
+        description: 内容
+        type: string
+      id:
+        description: id123
+        type: integer
+      type:
+        description: 类型
+        type: string
+    type: object
+  model.Result:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data:
+        type: object
+      message:
+        example: 请求体
+        type: string
+    type: object
+host: 192.168.121.134:8080
+info:
+  contact:
+    email: guozerun33@163.com
+    name: repaff
+    url: http://bing.com
+  description: Gin swagger 示例项目
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Gin swagger hello
+  version: "1.1"
+paths:
+  /article:
+    post:
+      consumes:
+      - application/x-json-stream
+      parameters:
+      - description: 文章
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/model.Article'
+          type: object
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Result'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/model.Result'
+      summary: 插入一篇文章
+      tags:
+      - 文章
+  /article/{id}:
+    get:
+      consumes:
+      - application/x-json-stream
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Result'
+      summary: 根据id获取一篇文章
+      tags:
+      - 文章
+swagger: "2.0"
