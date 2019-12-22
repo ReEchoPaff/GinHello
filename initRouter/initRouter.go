@@ -29,22 +29,6 @@ func SetupRouter() *gin.Engine {
 		index.Any("", handler.Index)
 	}
 
-	// 添加 user
-	userRouter := router.Group("/user")
-	{
-		// 注册
-		userRouter.POST("/register", handler.UserRegister)
-		userRouter.POST("/rest_register", handler.RestUserRegister)
-		// 登陆
-		userRouter.POST("/login", handler.UserLogin)
-		userRouter.POST("/rest_login", handler.RestUserLogin)
-		// 通过id，返回用户信息
-		userRouter.GET("/profile/", middleware.Auth(), handler.UserProfile)
-		userRouter.GET("/rest_profile", middleware.Auth(), handler.RestUserProfile)
-		// 上传文件
-		userRouter.POST("/update", middleware.Auth(), handler.UpdateUserProfile)
-	}
-
 	// 添加 article
 	articleRouter := router.Group("")
 	{

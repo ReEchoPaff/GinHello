@@ -22,4 +22,19 @@ client.test("Request executed successfully", function() {
 });
 %}
 
+### 注册
+POST {{host}}/article
+Content-Type: application/json
+
+{
+  "type": "go",
+  "content": "hello GGG"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.body.code === 200, "Response status is not 200");
+});
+%}
+
 ###
